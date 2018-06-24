@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="sm4:Web exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/sm4_Web_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="sm4-static-redirect/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="sm4-static-redirect" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/sm1/pom.xml" />
+        <option value="$PROJECT_DIR$/sm2/pom.xml" />
+        <option value="$PROJECT_DIR$/sm3/pom.xml" />
+        <option value="$PROJECT_DIR$/sm4/pom.xml" />
+        <option value="$PROJECT_DIR$/sm2-advanced-conversion/pom.xml" />
+        <option value="$PROJECT_DIR$/sm3-i18n-upload-exception/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="false" project-jdk-name="jdk0866" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

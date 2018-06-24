@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+    	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    	http://www.springframework.org/schema/context 
+    	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    	http://www.springframework.org/schema/mvc 
+    	http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+   <!-- 视图解析器 -->
+   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+   		<!-- 前缀：视图所在的文件夹 -->
+   		<property name="prefix" value="/WEB-INF/jsp/"></property>
+   		<!-- 后缀：限制视图的类型 -->
+   		<property name="suffix" value=".jsp"></property>
+   </bean>
+   
+   <!-- 配置controller, 使用注解方式-->
+   <!-- 启用注解 -->
+   <!-- <context:annotation-config></context:annotation-config> -->
+   
+   <!-- 开启容器自动扫描功能 -->
+   <context:component-scan base-package="com"></context:component-scan>
+   
+   <!-- 数据类型转换 -->
+   <mvc:annotation-driven conversion-service="conversionService"/>
+   
+   <bean id="conversionService"
+	class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+    <property name="converters">
+    	<!-- 2/2. 注入自定义的类型转换器 -->
+        <list>
+        	<bean class="com.util.BookConverter"></bean>
+        </list>
+    </property>
+</bean>
+
+	<!-- 访问静态资源 -->
+    <!-- 配置不被拦截的静态资源 -->
+    <!--${webappRoot}/resources directory
+    location：本地资源路径，注意必须是webapp根目录下的路径。
+    mappiing：两个*，它表示映射resources/下所有的URL，包括子路径（即接多个/）-->
+	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="/resources/css/" mapping="/resources/css/**"></mvc:resources>
+    <mvc:resources location="/resources/css/" mapping="/resources/css/**"></mvc:resources>
+    <mvc:resources location="/resources/image/" mapping="/resources/image/**"></mvc:resources>
+</beans>

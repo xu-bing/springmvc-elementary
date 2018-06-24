@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    	http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+    	http://www.springframework.org/schema/context
+    	http://www.springframework.org/schema/context/spring-context-4.2.xsd
+    	http://www.springframework.org/schema/mvc
+    	http://www.springframework.org/schema/mvc/spring-mvc-4.2.xsd">
+
+    <!--配置视图解析器-->
+    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <!--prefix-->
+        <property name="prefix" value="/WEB-INF/jsp/"></property>
+        <!--suffix-->
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+    <!-- 配置controller, 使用注解方式-->
+   <!-- 启用注解 -->
+   <!-- <context:annotation-config></context:annotation-config> -->
+   
+   <!-- 开启容器自动扫描功能 -->
+   <context:component-scan base-package="com"></context:component-scan>
+  
+  	<!-- ////////////////////////////////////////////////// -->
+  	<!-- 数据校验 -->
+  	<bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+  		<!-- 使用hibernate-validator -->
+  		<property name="providerClass" value="org.hibernate.validator.HibernateValidator"></property>
+  		
+  		<!-- 注入国际化信息资源 -->
+  		<property name="validationMessageSource" ref="messageSource"></property>
+  	</bean>
+  	
+  	<mvc:annotation-driven validator="validator"/>
+  	
+  	<!-- ////////////////////////////////////////////////// -->
+  	<!-- 国际化 -->
+  	<!-- 配置国际化资源文件阅读器 -->
+	<bean id="messageSource"
+	    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	    <property name="basename" value="classpath:message" />
+	</bean>
+    
+	<!-- 国际化操作拦截器 如基于Session/Cookie则必需配置 --> 
+	<mvc:interceptors>
+	    <bean id="localeChangeInterceptor" 
+		class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+	        <property name="paramName" value="lang" />
+	    </bean>
+	</mvc:interceptors>
+
+	<!--将提交上来的locale字段信息生成Locale对象并保存在session中--> 
+	<bean id="localeResolver" 
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver" />
+  	
+  	
+  	<!-- /////////////////////////////////////////////////// -->
+  	<!-- 文件上传下载 -->
+  	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/> 
+  	
+  	<!-- ////////////////////////////////////////////////// -->
+  	<!-- 异常处理 -->
+  	<!-- 方式1 -->
+  	<!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+  
+	    指定默认的异常处理页面，对于所有异常类型都适用  
+	    <property name="defaultErrorView" value="error"></property> 
+	 
+	    指定异常处理页面用来获取异常信息的变量名，默认名为exception  
+	    <property name="exceptionAttribute" value="ex"></property>
+	  
+	    指定需要特殊处理的异常，用类名或完全路径名作为key，异常页面名称作为值  
+	    <property name="exceptionMappings">  
+	         <props>   
+	             <prop key="java.lang.NullPointerException">null-pointer</prop>
+	         </props>  
+	     </property>  
+ 	</bean>  -->
+ 	
+ 	<!-- 方式2 -->
+ 	<!-- <bean id="exceptionHandler" class="com.controller.MyExceptionHandlerController"></bean> -->
+
+	<!--/////////////////////////////////////////////////// -->
+	<!--通过插件上传文件-->
+  	<mvc:annotation-driven></mvc:annotation-driven>
+	<mvc:resources location="/resources/css/" mapping="/resources/css/**"></mvc:resources>
+    <mvc:resources location="/resources/html/" mapping="/resources/html/**"></mvc:resources> 
+    <mvc:resources location="/resources/js/" mapping="/resources/js/**"></mvc:resources> 
+    <mvc:resources location="/upload/" mapping="/upload/**"></mvc:resources>		
+
+
+</beans>

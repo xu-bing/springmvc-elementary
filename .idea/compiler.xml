@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="sm1" />
+        <module name="sm2" />
+        <module name="sm2-advanced-conversion" />
+        <module name="sm3" />
+        <module name="sm3-i18n-upload-exception" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="sm1" target="1.5" />
+      <module name="sm2" target="1.5" />
+      <module name="sm2-advanced-conversion" target="1.5" />
+      <module name="sm3" target="1.5" />
+      <module name="sm3-i18n-upload-exception" target="1.5" />
+      <module name="sm4" target="1.5" />
+    </bytecodeTargetLevel>
+  </component>
+</project>
